@@ -1,4 +1,0 @@
-@local = http://localhost:3900
-
-GET {{local}}/api/tasks/display-all-tasks
-

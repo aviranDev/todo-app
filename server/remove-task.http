@@ -1,4 +1,0 @@
-@local = http://localhost:3900
-
-DELETE {{local}}/api/tasks/remove-task/6211649e6af8bdcd4302b89c
-

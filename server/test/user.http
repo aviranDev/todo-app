@@ -1,0 +1,23 @@
+@local = http://localhost:3900
+
+//USER REGISTRATION
+POST {{local}}/api/users/create-user
+Content-Type: application/json
+
+{
+"firstName": "asAS",
+"lastName": "asAS",
+"email": "asaSAsaSA@gmail.com",
+"password": "sdssssd34A23423!fds"
+}
+
+###
+
+//USER LOGIN
+POST {{local}}/api/auth/login
+Content-Type: application/json
+
+{
+"email": "asaSAsaSA@gmail.com",
+"password": "sdssssd34A23423!fds"
+}

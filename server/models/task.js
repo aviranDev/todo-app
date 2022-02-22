@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const taskSchema = new mongoose.Schema({
   task: {
     type: String,
@@ -7,6 +8,10 @@ const taskSchema = new mongoose.Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }
 });
 

@@ -1,8 +1,0 @@
-@local = http://localhost:3900
-
-PUT {{local}}/api/tasks/edit-task/62106b0507168b14d6bd24e0
-Content-Type: application/json
-
-{
-  "task": "This is a test task new"
-}

@@ -1,0 +1,32 @@
+@local = http://localhost:3900
+
+//CREATE TASK
+POST {{local}}/api/tasks/add-task
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEyZTU5NThmMWRjN2Q5MTE1MDFjYmYiLCJpYXQiOjE2NDU0MDU2MTAsImV4cCI6MTY0NTU3ODQxMH0.8xd7RkZY1mKUI8bww7_pfIUcWR66IFaz0vEbUns5aUo
+
+{
+  "task": "This is a test task from another task"
+}
+
+###
+
+//DISPLAY ALL TASKS
+GET {{local}}/api/tasks/display-all-tasks
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEyZDY2NzJjZGMwMTlhMzQxNzVlOTYiLCJpYXQiOjE2NDU0MDE3NzUsImV4cCI6MTY0NTU3NDU3NX0.39bxNFyEV_k7nMmqfPMqoAht93reOjZXLvSSXDJJSbo
+
+###
+
+//EDIT TASK
+PUT {{local}}/api/tasks/edit-task/6212e394e6d2e844943f94cd
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEyZDY2NzJjZGMwMTlhMzQxNzVlOTYiLCJpYXQiOjE2NDU0MDE3NzUsImV4cCI6MTY0NTU3NDU3NX0.39bxNFyEV_k7nMmqfPMqoAht93reOjZXLvSSXDJJSbo
+
+{
+  "task": "This is a test task updated"
+}
+
+###
+
+DELETE {{local}}/api/tasks/remove-task/6212e394e6d2e844943f94cd
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjEyZDY2NzJjZGMwMTlhMzQxNzVlOTYiLCJpYXQiOjE2NDU0MDE3NzUsImV4cCI6MTY0NTU3NDU3NX0.39bxNFyEV_k7nMmqfPMqoAht93reOjZXLvSSXDJJSbo

@@ -5,38 +5,42 @@ import {
   updateTask,
   removeTask,
 } from "../services/taskServices";
-import { Typography, Paper, TextField, Checkbox, Button } from "@mui/material";
+import { Typography, Paper, TextField, Checkbox, Button, Grid } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Link } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 
 
-function Tasks() {
+function Tasks({ user }) {
   const [tasks, setTasks] = useState([]);
   const [currentTask, setCurrentTask] = useState("");
-
+  console.log(user);
   /*****************************************************
-  * CRUD API DOTO TASK
+  * CRUD API TODO TASK
   */
 
   /**
-   * DISPLAY ALL TODO TASKS
+   * DISPLAY ALL USER TASKS
    */
   useEffect(() => {
     async function fecthAllTasksData() {
       try {
-        const { data } = await getAllTasks();
-        setTasks(data);
+        if (user) {
+          const { data } = await getAllTasks();
+          setTasks(data);
+        }
       } catch (error) {
         console.log(error);
       }
     }
     fecthAllTasksData();
-  }, [setTasks])
+  }, [setTasks, user])
   console.log(tasks);
 
 
   /**
-   * ADD TODO TASK
-   * @param {*} e 
+   * ADD TASK
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +56,6 @@ function Tasks() {
 
   /**
    * EDIT TODO TASK
-   * @param {*} currentTask 
    */
   const handleUpdate = async (currentTask) => {
     const originalTasks = tasks;
@@ -72,7 +75,6 @@ function Tasks() {
 
   /**
    * REMOVE TODO TASK
-   * @param {*} currentTask 
    */
   const handleDelete = async (currentTask) => {
     try {
@@ -85,65 +87,67 @@ function Tasks() {
   }
 
 
-  /*****************************************************
-   * FORM INPUT OPERATION
-   */
-
   /**
    * CHANGE INPUT VALUE
-   * @param {*} param0 
    */
   const handleChange = ({ currentTarget: input }) => {
     setCurrentTask(input.value)
   }
 
   return (
-    <>
-      {/* <Typography variant="h2">Todo list</Typography> */}
-      <Paper elevation={5} className="container">
-        <div className="heading">
-          <Typography variant="h3">TODO Today</Typography>
-        </div>
-        <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
-          <TextField
-            variant="outlined"
-            size="small"
-            style={{ width: "80%" }}
-            value={currentTask}
-            required={true}
-            onChange={handleChange}
-            placeholder="Add New TO-DO"
-          />
+    <Paper elevation={5} className="container">
+      <div>
+        <Link className='signout' to={"/signout"} >
+          Signout
+        </Link>
+      </div>
+
+      <div className="heading">
+        <Typography variant="h4">ToDo<BorderColorIcon /></Typography>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
+        <TextField
+          variant="outlined"
+          size="small"
+          style={{ width: "80%" }}
+          value={currentTask}
+          required={true}
+          onChange={handleChange}
+          placeholder="Add New TO-DO"
+        />
+
+        <Grid m={2} item xs={1} sm={3} xl={2} lg={3}>
           <Button
             style={{ height: "40px" }}
             color="primary"
             variant="outlined"
             type="submit"
           >
-            Add task
+            <AddIcon />
           </Button>
-        </form>
-        <div>
-          {tasks.map(task => (
-            <Paper key={task._id} className="flex task_container">
-              <Checkbox
-                checked={task.completed}
-                onClick={() => handleUpdate(task._id)}
-                color="primary"
-              />
-              <div className={task.completed ? "task line_through" : "task"}>
-                {task.task}
-              </div>
-              <Button
-                onClick={() => handleDelete(task._id)}
-                color="secondary"
-              >
-                <DeleteIcon /></Button>
-            </Paper>
-          ))}
-        </div>
-      </Paper>
-    </>
+        </Grid>
+      </form>
+      <div>
+        {tasks.map(task => (
+          <Paper elevation={2} key={task._id} className="flex task_container">
+            <Checkbox
+              checked={task.completed}
+              onClick={() => handleUpdate(task._id)}
+              color="primary"
+            />
+            <div className={task.completed ? "task line_through" : "task"}>
+              {task.task}
+            </div>
+            <Button
+              onClick={() => handleDelete(task._id)}
+              color="secondary"
+            >
+              <DeleteIcon /></Button>
+          </Paper>
+        ))}
+      </div>
+    </Paper>
   )
 }
 

@@ -13,7 +13,7 @@ export const addTask = (task) => {
  * DISPLAY ALL TASKS
  */
 export const getAllTasks = () => {
-  return axois.get(`${apiUrl}/tasks/display-all-tasks`);
+  return axois.get(`${apiUrl}/tasks/display-my-tasks`);
 }
 
 

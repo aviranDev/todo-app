@@ -12,9 +12,10 @@ Visit my website: https://sad-murdock-a4f300.netlify.app
 
 * Node.js 
 * Express
+* JSON Web Token
 * React 
+* Material UI
 * MongoDB Atlas
-* MUI 
 
 ## Getting Started
 prerequisites: 

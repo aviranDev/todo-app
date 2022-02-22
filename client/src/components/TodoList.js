@@ -15,7 +15,6 @@ import AddIcon from '@mui/icons-material/Add';
 function Tasks({ user }) {
   const [tasks, setTasks] = useState([]);
   const [currentTask, setCurrentTask] = useState("");
-  console.log(user);
   /*****************************************************
   * CRUD API TODO TASK
   */
@@ -36,7 +35,6 @@ function Tasks({ user }) {
     }
     fecthAllTasksData();
   }, [setTasks, user])
-  console.log(tasks);
 
 
   /**

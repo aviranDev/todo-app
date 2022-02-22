@@ -1,7 +1,7 @@
 const { User, validLoginFileds } = require('../models/user');
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 /**

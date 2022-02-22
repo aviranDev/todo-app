@@ -9,7 +9,7 @@ import {
   Button,
   Grid, Card, CardContent
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 /**
@@ -27,7 +27,6 @@ function Signin() {
   });
 
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   /**
   * VALIDATE FORM 
@@ -48,7 +47,6 @@ function Signin() {
       errors[detail.path[0]] = detail.message;
     }
 
-    console.log(errors)
     return errors;
   };
 
@@ -102,7 +100,7 @@ function Signin() {
       }
     }
   }
-  console.log(error)
+
   return (
     <>
       <Paper elevation={4} className="container">

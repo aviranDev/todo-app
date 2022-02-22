@@ -1,7 +1,7 @@
 const { User, validateUserSchema } = require('../models/user');
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 /**
@@ -18,7 +18,7 @@ router.post('/create-user', async (req, res) => {
     if (user) return res.status(400).send('User already registered');
 
     //GENERATE SALT AND ASSIGN IT FOR HASH USER PASSWORD 
-    const salt = await bcrypt.genSalt(Number(process.env.SALT))
+    const salt = await bcrypt.genSaltSync(Number(process.env.SALT))
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     //GENERATE USER

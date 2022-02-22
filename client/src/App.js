@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     setUser(userService.getCurrentUser());
   }, []);
-  console.log(user);
+
   return (
     <div className="App">
       <Routes>

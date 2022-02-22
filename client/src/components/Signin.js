@@ -85,9 +85,7 @@ function Signin() {
     e.preventDefault();
     const { email, password } = data
     try {
-
       const errors = validateForm()
-      console.log(errors)
       if (errors) {
         setError(errors)
         return

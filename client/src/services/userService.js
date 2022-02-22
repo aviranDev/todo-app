@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import httpService from "./httpService"
-const apiUrl = "http://localhost:3900/api";
+const apiUrl = "https://maketodotoday.herokuapp.com/api";
 
 const TOKEN_KEY = 'my_token'
 httpService.setDefaultCommonHeader('x-auth-token', getJWT());

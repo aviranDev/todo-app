@@ -1,5 +1,5 @@
 import axois from 'axios';
-const apiUrl = "http://localhost:3900/api";
+const apiUrl = "https://maketodotoday.herokuapp.com/api";
 
 /**
  * CREATE TASK

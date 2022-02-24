@@ -111,16 +111,15 @@ function Signup() {
 
   return (
     <>
-      <Paper elevation={4} className="container">
-        <div className="heading">
-          <Typography variant="h4">ToDo<BorderColorIcon /> Sign up</Typography>
-        </div>
-        <Card elevation={5}>
+      <Paper elevation={4} >
+        <Typography align='center' variant="h4">ToDo<BorderColorIcon /> Sign up</Typography>
+
+        <Card style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }} elevation={5}>
           <CardContent>
             <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
+              <Grid container spacing={1}>
 
-                <Grid xs={12} sm={12} item xl={6} lg={6} md={12}>
+                <Grid xs={12} sm={6} item>
                   <TextField
                     variant='outlined'
                     label="First Name"
@@ -129,11 +128,13 @@ function Signup() {
                     onChange={handleChange}
                     fullWidth
                     type="text"
+                    placeholder='Enter First Name'
+                    required
                   />
                   {error && <span className='error'>{error.firstName}</span>}
                 </Grid>
 
-                <Grid item xs={12} sm={12} xl={6} lg={6} md={12}>
+                <Grid xs={12} sm={6} item >
                   <TextField
                     variant='outlined'
                     label="Last Name"
@@ -142,11 +143,13 @@ function Signup() {
                     onChange={handleChange}
                     fullWidth
                     type="text"
+                    placeholder='Enter Last Name'
+                    required
                   />
                   {error && <span className='error'>{error.lastName}</span>}
                 </Grid>
 
-                <Grid item xs={12} sm={12} xl={12} lg={12} >
+                <Grid xs={12} item >
                   <TextField
                     variant='outlined'
                     label="Email"
@@ -155,11 +158,13 @@ function Signup() {
                     onChange={handleChange}
                     type="email"
                     fullWidth
+                    placeholder='Enter Email'
+                    required
                   />
                   {error && <span className='error'>{error.email}</span>}
                 </Grid>
 
-                <Grid item xs={12} sm={12} xl={12} lg={12} >
+                <Grid xs={12} item >
                   <TextField
                     variant='outlined'
                     label="Password"
@@ -168,10 +173,15 @@ function Signup() {
                     onChange={handleChange}
                     type="password"
                     fullWidth
+                    placeholder='Enter Password'
+                    required
                   />
                   {error && <span className='error'>{error.password}</span>}
                 </Grid>
-                <Grid item xs={12} sm={12} xl={12} lg={12}>
+
+
+
+                <Grid xs={12} item >
                   <Button onClick={validateForm} type='submit' variant='contained' color='primary' fullWidth>Submit</Button>
                 </Grid>
 
@@ -180,11 +190,12 @@ function Signup() {
           </CardContent>
         </Card>
 
-        < div >
-          <Link className='link' to={"/signin"} >
-            Signin
-          </Link>
-        </div>
+        <Link style={{ margin: "20px" }} className='link' to={"/signin"} >
+          <Typography>
+            Sign in
+          </Typography>
+        </Link>
+
       </Paper>
     </>
   )

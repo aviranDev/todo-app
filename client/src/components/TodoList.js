@@ -5,16 +5,20 @@ import {
   updateTask,
   removeTask,
 } from "../services/taskServices";
-import { Typography, Paper, TextField, Checkbox, Button, Grid } from "@mui/material";
+import { Typography, Paper, TextField, Checkbox, Button, Grid, Card, CardContent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
+import CreateIcon from '@mui/icons-material/Create';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 function Tasks({ user }) {
   const [tasks, setTasks] = useState([]);
   const [currentTask, setCurrentTask] = useState("");
+  const [todoEditting, setTodoEditting] = useState(null);
+  const [edittingText, setEdittingText] = useState("");
   /*****************************************************
   * CRUD API TODO TASK
   */
@@ -52,6 +56,21 @@ function Tasks({ user }) {
     }
   }
 
+  const submitEdits = async (id) => {
+    const updatedTodos = [...tasks].map((task) => {
+      if (task._id === id) {
+        task.task = edittingText;
+      }
+      return task;
+    });
+    setTasks(updatedTodos);
+
+    await updateTask(id, {
+      task: edittingText,
+    });
+    setTodoEditting(null);
+  }
+
   /**
    * EDIT TODO TASK
    */
@@ -84,7 +103,6 @@ function Tasks({ user }) {
     }
   }
 
-
   /**
    * CHANGE INPUT VALUE
    */
@@ -93,59 +111,90 @@ function Tasks({ user }) {
   }
 
   return (
-    <Paper elevation={5} className="container">
-      <div>
+    <>
+      <Paper elevation={4}>
         <Link className='signout' to={"/signout"} >
-          Signout
+          <Typography>
+            <LogoutIcon />
+          </Typography>
         </Link>
-      </div>
+        <Typography align='center' variant="h4">ToDo<BorderColorIcon /></Typography>
 
-      <div className="heading">
-        <Typography variant="h4">ToDo<BorderColorIcon /></Typography>
-      </div>
+        <Card style={{ maxWidth: 450, margin: "0 auto", padding: "20px 20px" }} elevation={5} >
+          <CardContent>
+            <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
+              <Grid container spacing={1}>
+                <Grid xs={9} item>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={currentTask}
+                    required={true}
+                    onChange={handleChange}
+                    placeholder="Add New TO-DO"
+                  />
+                </Grid>
+                <Grid xs={3} item >
+                  <Button
+                    color="primary"
+                    type="submit"
+                  >
+                    <AddIcon />
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+            <div>
+              {tasks.map(task => (
+                <Paper elevation={3} key={task._id} className="flex task_container">
+                  <Checkbox
+                    checked={task.completed}
+                    onClick={() => handleUpdate(task._id)}
+                    color="primary"
+                  />
+                  <div className={task.completed ? "task line_through" : "task"}>
+                    {task._id === todoEditting ? (
+                      <TextField
+                        variant="standard"
+                        size="small"
+                        placeholder={task.task}
+                        // defaultValue={task.task}
+                        onChange={(e) => setEdittingText(e.target.value)}
+                      />
+                    ) : (
+                      <Grid xs={12} item>
+                        {task.task}
+                      </Grid>
+                    )}
+                  </div>
 
-      <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
-        <TextField
-          variant="outlined"
-          size="small"
-          style={{ width: "80%" }}
-          value={currentTask}
-          required={true}
-          onChange={handleChange}
-          placeholder="Add New TO-DO"
-        />
+                  <div>
+                    {task._id === todoEditting ? (
+                      <Button
+                        onClick={() => submitEdits(task._id)} color="secondary">
+                        <BorderColorIcon />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => setTodoEditting(task._id)}
+                        color="secondary"
+                      >
+                        <CreateIcon />  </Button>)}
+                  </div>
 
-        <Grid m={2} item xs={1} sm={3} xl={2} lg={3}>
-          <Button
-            style={{ height: "40px" }}
-            color="primary"
-            variant="outlined"
-            type="submit"
-          >
-            <AddIcon />
-          </Button>
-        </Grid>
-      </form>
-      <div>
-        {tasks.map(task => (
-          <Paper elevation={2} key={task._id} className="flex task_container">
-            <Checkbox
-              checked={task.completed}
-              onClick={() => handleUpdate(task._id)}
-              color="primary"
-            />
-            <div className={task.completed ? "task line_through" : "task"}>
-              {task.task}
+                  <Button
+                    onClick={() => handleDelete(task._id)}
+                    color="secondary"
+                  >
+                    <DeleteIcon /></Button>
+                </Paper>
+              ))}
             </div>
-            <Button
-              onClick={() => handleDelete(task._id)}
-              color="secondary"
-            >
-              <DeleteIcon /></Button>
-          </Paper>
-        ))}
-      </div>
-    </Paper>
+
+          </CardContent>
+        </Card>
+      </Paper>
+    </>
   )
 }
 

@@ -6,7 +6,7 @@ import {
   getAllTasks,
   updateTask,
   removeTask,
-} from "../../services/taskServices";
+} from "../services/taskServices";
 import { Typography, Paper, TextField, Checkbox, Button, Grid, Card, CardContent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';

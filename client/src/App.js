@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import userService from "./services/userService";
-import TodoList from "./components/TodoList";
+import Todolist from "./components/Todolist";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Logout from "./components/Logout";
@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<TodoList user={user} />} />
+          <Route path="/" element={<Todolist user={user} />} />
           {user && <Route path="/signup" element={<Navigate to="/" />} />}
           {user && <Route path="/signin" element={<Navigate to="/" />} />}
         </Route>

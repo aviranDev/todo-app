@@ -1,0 +1,6 @@
+.container {
+  height: 100vh;
+  display: flow-root;
+  justify-content: center;
+  align-items: center;
+}

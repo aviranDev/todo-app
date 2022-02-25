@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import TodoCSS from "./Todolist.module.css"
+
 import {
   addTask,
   getAllTasks,
   updateTask,
   removeTask,
-} from "../services/taskServices";
+} from "../../services/taskServices";
 import { Typography, Paper, TextField, Checkbox, Button, Grid, Card, CardContent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -121,7 +123,7 @@ function Tasks({ user }) {
   }
 
   return (
-    <>
+    <div className={TodoCSS.container}>
       <Paper elevation={4}>
         <Link className='signout' to={"/signout"} >
           <Typography>
@@ -130,16 +132,21 @@ function Tasks({ user }) {
         </Link>
         <Typography align='center' variant="h4">ToDo<BorderColorIcon /></Typography>
 
-        <Card style={{ maxWidth: 450, margin: "0 auto", padding: "20px 20px" }} elevation={5} >
+        <Card style={{
+          width: 550,
+          margin: "0 auto",
+          padding: "20px 20px",
+          background: "#cfcfcf"
+        }} elevation={5} >
           <CardContent>
             <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
               <Grid container spacing={1}>
-                <Grid xs={9} item>
-                  <TextField
+                <Grid xs={9} item >
+                  <TextField style={{ width: "100%" }}
                     variant="outlined"
                     size="small"
                     value={currentTask}
-                    required={true}
+                    required
                     onChange={handleChange}
                     placeholder="Add New TO-DO"
                   />
@@ -164,7 +171,7 @@ function Tasks({ user }) {
                   />
                   <div className={task.completed ? "task line_through" : "task"}>
                     {task._id === todoEditting ? (
-                      <TextField
+                      <TextField style={{ width: "100%" }}
                         variant="standard"
                         size="small"
                         defaultValue={task.task}
@@ -182,14 +189,14 @@ function Tasks({ user }) {
                     {task._id === todoEditting ? (
                       <Button
                         onClick={() => submitEdits(task._id)} color="secondary">
-                        <BorderColorIcon />
+                        <BorderColorIcon style={{ color: "blue" }} />
                       </Button>
                     ) : (
                       <Button
                         onClick={() => setTodoEditting(task._id)}
                         color="secondary"
                       >
-                        <CreateIcon />  </Button>)}
+                        <CreateIcon style={{ color: "#cfcfcf" }} />  </Button>)}
                   </div>
 
                   <Button
@@ -204,7 +211,7 @@ function Tasks({ user }) {
           </CardContent>
         </Card>
       </Paper>
-    </>
+    </div>
   )
 }
 

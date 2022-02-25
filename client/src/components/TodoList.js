@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import "./todoList.css"
+
 import {
   addTask,
   getAllTasks,
   updateTask,
   removeTask,
-} from "../services/taskServices";
+} from "../../services/taskServices";
 import { Typography, Paper, TextField, Checkbox, Button, Grid, Card, CardContent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -18,7 +20,7 @@ function Tasks({ user }) {
   const [tasks, setTasks] = useState([]);
   const [currentTask, setCurrentTask] = useState("");
   const [todoEditting, setTodoEditting] = useState(null);
-  const [edittingText, setEdittingText] = useState("");
+  const [edittingText, setEdittingText] = useState(null);
   /*****************************************************
   * CRUD API TODO TASK
   */
@@ -40,6 +42,11 @@ function Tasks({ user }) {
     fecthAllTasksData();
   }, [setTasks, user])
 
+  /*   console.log("tasks ", tasks);
+    console.log("currentTask: ", currentTask)
+    console.log("todoEditting ", todoEditting);
+    console.log("edittingText ", edittingText);
+    console.log("------------------------------------------------- "); */
 
   /**
    * ADD TASK
@@ -57,18 +64,23 @@ function Tasks({ user }) {
   }
 
   const submitEdits = async (id) => {
+    if (!edittingText) {
+      setTodoEditting(null);
+      return
+    }
     const updatedTodos = [...tasks].map((task) => {
       if (task._id === id) {
         task.task = edittingText;
       }
       return task;
     });
-    setTasks(updatedTodos);
 
+    setTasks(updatedTodos);
     await updateTask(id, {
       task: edittingText,
     });
     setTodoEditting(null);
+    setEdittingText(null);
   }
 
   /**
@@ -158,7 +170,8 @@ function Tasks({ user }) {
                         variant="standard"
                         size="small"
                         placeholder={task.task}
-                        // defaultValue={task.task}
+                        defaultValue={task.task}
+                        type="text"
                         onChange={(e) => setEdittingText(e.target.value)}
                       />
                     ) : (

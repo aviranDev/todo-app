@@ -169,7 +169,6 @@ function Tasks({ user }) {
                       <TextField
                         variant="standard"
                         size="small"
-                        placeholder={task.task}
                         defaultValue={task.task}
                         type="text"
                         onChange={(e) => setEdittingText(e.target.value)}

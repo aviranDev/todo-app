@@ -136,7 +136,7 @@ function Tasks({ user }) {
           width: 550,
           margin: "0 auto",
           padding: "20px 20px",
-          background: "#cfcfcf"
+          background: "green"
         }} elevation={5} >
           <CardContent>
             <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>

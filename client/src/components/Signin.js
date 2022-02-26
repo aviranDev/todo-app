@@ -11,6 +11,13 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import FormControl from '@mui/material/FormControl';
 
 /**
  * SIGNIN VALIDATION SCHEMA TEMPLATE
@@ -26,6 +33,7 @@ function Signin() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   /**
@@ -99,6 +107,16 @@ function Signin() {
     }
   }
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+
+  };
+  // console.log(showPassword)
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className='form'>
       <Paper elevation={4}>
@@ -127,17 +145,33 @@ function Signin() {
                 </Grid>
 
                 <Grid xs={12} item >
-                  <TextField
-                    variant='outlined'
-                    label="Password"
-                    name='password'
-                    value={data.password}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder='Enter Password'
-                    fullWidth
-                    required />
-                  {error && <span className='error'>{error.password}</span>}
+                  <FormControl sx={{ width: '100%' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      name='password'
+                      value={data.password}
+                      onChange={handleChange}
+                      type={showPassword ? 'text' : 'password'}
+                      fullWidth
+                      placeholder='Enter Password'
+                      required
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                    {error && <span className='error'>{error.password}</span>}
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12} >
@@ -149,7 +183,7 @@ function Signin() {
           </CardContent>
         </Card>
 
-        <Link style={{ margin: "20px" }} className='link' to={"/signup"} >
+        <Link style={{ margin: "15px" }} className='link' to={"/signup"} >
           <Typography>
             Sign up
           </Typography>

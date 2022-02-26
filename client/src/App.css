@@ -70,3 +70,16 @@
 .error {
   color: rgb(182, 50, 50);
 }
+
+.info {
+  color: rgb(1, 120, 150);
+  font-size: 0.9rem;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1000;
+  cursor: pointer;
+}

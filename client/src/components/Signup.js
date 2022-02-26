@@ -11,6 +11,13 @@ import {
   Grid, Card, CardContent
 } from "@mui/material";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import FormControl from '@mui/material/FormControl';
 
 /**
  * SIGNUP VALIDATION SCHEMA TEMPLATE
@@ -31,7 +38,10 @@ function Signup() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [info, setInfo] = useState(false);
+
   const navigate = useNavigate();
 
   /**
@@ -53,7 +63,7 @@ function Signup() {
       errors[detail.path[0]] = detail.message;
     }
 
-    console.log(errors)
+    // console.log(errors)
     return errors;
   };
 
@@ -66,6 +76,7 @@ function Signup() {
       ...data,
       [input.name]: input.value
     })
+    setInfo(false)
     setError({
       ...error,
       [input.name]: validateInput(input.value)
@@ -108,6 +119,20 @@ function Signup() {
       }
     }
   }
+
+
+  const infoMessage = '* Password should contain at least: 8 characters long, 1 Uppercase, 1 Lowercase, 1 symbol';
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword)
+
+  };
+  // console.log(showPassword)
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
 
   return (
     <div className='form'>
@@ -165,21 +190,36 @@ function Signup() {
                 </Grid>
 
                 <Grid xs={12} item >
-                  <TextField
-                    variant='outlined'
-                    label="Password"
-                    name='password'
-                    value={data.password}
-                    onChange={handleChange}
-                    type="password"
-                    fullWidth
-                    placeholder='Enter Password'
-                    required
-                  />
-                  {error && <span className='error'>{error.password}</span>}
+                  <FormControl sx={{ width: '100%' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      name='password'
+                      value={data.password}
+                      onChange={handleChange}
+                      onClick={() => setInfo(!data.password)}
+                      type={showPassword ? 'text' : 'password'}
+                      fullWidth
+                      placeholder='Enter Password'
+                      required
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                    {error && <span className='error'>{error.password}</span>}
+                    {info && <span className='info'>{infoMessage}</span>}
+                  </FormControl>
                 </Grid>
-
-
 
                 <Grid xs={12} item >
                   <Button onClick={validateForm} type='submit' variant='contained' color='primary' fullWidth>Submit</Button>
@@ -190,14 +230,14 @@ function Signup() {
           </CardContent>
         </Card>
 
-        <Link style={{ margin: "20px" }} className='link' to={"/signin"} >
+        <Link style={{ margin: "15px" }} className='link' to={"/signin"} >
           <Typography>
             Sign in
           </Typography>
         </Link>
 
       </Paper>
-    </div>
+    </div >
   )
 }
 

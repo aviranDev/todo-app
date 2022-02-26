@@ -110,7 +110,7 @@ function Signup() {
   }
 
   return (
-    <>
+    <div className='form'>
       <Paper elevation={4} >
         <Typography align='center' variant="h4">ToDo<BorderColorIcon /> Sign up</Typography>
 
@@ -197,7 +197,7 @@ function Signup() {
         </Link>
 
       </Paper>
-    </>
+    </div>
   )
 }
 

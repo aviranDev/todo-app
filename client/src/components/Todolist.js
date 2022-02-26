@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import TodoCSS from "./Todolist.module.css"
+
 
 import {
   addTask,
   getAllTasks,
   updateTask,
   removeTask,
-} from "../../services/taskServices";
+} from "../services/taskServices";
 import { Typography, Paper, TextField, Checkbox, Button, Grid, Card, CardContent } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -123,26 +123,27 @@ function Tasks({ user }) {
   }
 
   return (
-    <div className={TodoCSS.container}>
+    <div className="todo">
       <Paper elevation={4}>
+
         <Link className='signout' to={"/signout"} >
           <Typography>
             <LogoutIcon />
           </Typography>
         </Link>
+
         <Typography align='center' variant="h4">ToDo<BorderColorIcon /></Typography>
 
         <Card style={{
-          width: 550,
+          maxWidth: 450,
           margin: "0 auto",
-          padding: "20px 20px",
-          background: "green"
+          background: "grey"
         }} elevation={5} >
           <CardContent>
-            <form onSubmit={handleSubmit} className="flex" style={{ margin: "15px 0" }}>
+            <form onSubmit={handleSubmit} >
               <Grid container spacing={1}>
                 <Grid xs={9} item >
-                  <TextField style={{ width: "100%" }}
+                  <TextField
                     variant="outlined"
                     size="small"
                     value={currentTask}
@@ -207,8 +208,8 @@ function Tasks({ user }) {
                 </Paper>
               ))}
             </div>
-
           </CardContent>
+
         </Card>
       </Paper>
     </div>

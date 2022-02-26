@@ -100,10 +100,14 @@ function Signin() {
   }
 
   return (
-    <>
+    <div className='form'>
       <Paper elevation={4}>
         <Typography align='center' variant="h4">ToDo<BorderColorIcon /> Sign in</Typography>
-        <Card style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }} elevation={5}>
+        <Card style={{
+          maxWidth: 450,
+          margin: "0 auto",
+          padding: "20px 5px"
+        }} elevation={5}>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={1}>
@@ -152,7 +156,7 @@ function Signin() {
         </Link>
 
       </Paper>
-    </>
+    </div>
   )
 }
 

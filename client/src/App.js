@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import userService from "./services/userService";
-import Todolist from "./components/todo/Todolist";
+import Todolist from "./components/Todolist";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Logout from "./components/Logout";

@@ -6,6 +6,20 @@
   background-color: #080808d3;
 }
 
+.form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo {
+  height: 100vh;
+  display: top;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading {
   font-size: 20px;
   text-align: center;
